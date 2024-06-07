@@ -1,0 +1,14 @@
+{% extends 'layout.html' %} 
+{% block body %}
+  <div class="jumbotron text-center d-flex align-items-center justify-content-center" style="background-image: url('../static/img/header-medium.jpg'); height: 100vh; background-size: cover; color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);">
+    <div>
+      <h1 class="display-4">Welcome To CaRents</h1>
+      <p class="lead">Mau Sewa Mobil Murah? Daftarkan Akun Kalian Sekarang Juga</p>
+    
+      {% if session.logged_in == NULL %}
+        <a href="/register" class="btn btn-primary">Sign Up</a>
+        <a href="/login" class="btn btn-success">Login</a>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

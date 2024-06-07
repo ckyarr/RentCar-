@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Yuk, Sewa Mobilmu Sekarang Juga!</h1>
+
+    <div class="row">
+      {% if mobil_data %}
+      {% for mobil in mobil_data %}
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="{{ url_for('get_foto', filename=mobil.foto_mobil) }}" class="card-img-top" alt="Car Photo" style="width: 100%; height: 250px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title">{{ mobil.merk }}</h5>
+              <p class="card-text">
+                <strong>Jenis:</strong> {{ mobil.jenis }}<br>
+                <strong>Model:</strong> {{ mobil.model }}<br>
+                <strong>Harga Sewa per Hari:</strong> {{ mobil.harga_sewa | format_rupiah }}<br>
+                <strong>Penumpang:</strong> {{ mobil.jumlah_penumpang }} Orang
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <a class="btn btn-primary" href="{{ url_for('buat_sewa', nomor_plat=mobil.nomor_plat) }}">Sewa</a>
+                <!-- Tambahkan tombol WhatsApp -->
+                <a href="https://api.whatsapp.com/send?phone=62{{ mobil.nomor_telepon }}" target="_blank">
+                  <img src="../static/img/whatsapp.png" alt="WhatsApp" width="70" height="60">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% else %}
+      <p class="text-center mt-3">No available cars.</p>
+    {% endif %}
+  </div>
+{% endblock %}

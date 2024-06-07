@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Car Details</h1>
+
+    {% if mobil_data %}
+      <div class="card" style="width: 400px; margin: 0 auto;">
+        <img src="{{ url_for('get_foto', filename=mobil_data.foto_mobil) }}" class="card-img-top" alt="Car Photo" style="width: 100%; height: 200px; object-fit: cover;">
+        <div class="card-body">
+          <h5 class="card-title">{{ mobil_data.merk }}</h5>
+          <p class="card-text">
+            <ul class="list-unstyled">
+              <li><strong>Nomor Plat:</strong> {{ mobil_data.nomor_plat }}</li>
+              <li><strong>Jenis:</strong> {{ mobil_data.jenis }}</li>
+              <li><strong>Model:</strong> {{ mobil_data.model }}</li>
+              <li><strong>Jumlah Penumpang:</strong> {{ mobil_data.jumlah_penumpang }}</li>
+              <li><strong>Tahun Produksi:</strong> {{ mobil_data.tahun }}</li>
+              <li><strong>Nomor Telepon:</strong> {{ mobil_data.nomor_telepon }}</li>
+              <li><strong>Harga Sewa:</strong> {{ mobil_data.harga_sewa | format_rupiah }}</li>
+              <li><strong>Lokasi:</strong> {{ mobil_data.lokasi }}</li>
+              <li><strong>Pemilik:</strong> {{ mobil_data.milik_username }}</li>
+              <div class="d-flex justify-content-between align-items-center">
+                <a class="btn btn-primary" href="{{ url_for('cek_sewa') }}">Kembali</a>
+                <!-- Tambahkan tombol WhatsApp -->
+                <a href="https://api.whatsapp.com/send?phone=62{{ mobil_data.nomor_telepon }}" target="_blank">
+                    <img src="../static/img/whatsapp.png" alt="WhatsApp" width="70" height="60">
+                </a>
+            </div>
+            </ul>
+          </p>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
+  {% if not mobil_data %}
+    <p class="text-center mt-3">Wah, kamu belum punya mobil pesanan!</p>
+  {% endif %}
+{% endblock %}

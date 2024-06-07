@@ -1,0 +1,17 @@
+<!-- confirmation_success.html -->
+
+{% extends 'layout.html' %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="text-center">Konfirmasi Pemesanan Berhasil!</h1>
+        
+        <!-- Tombol kembali ke 'cek_sewa' dan 'home' bersebelahan di tengah -->
+        <div class="text-center">
+            <a href="{{ url_for('cek_sewa') }}" class="btn btn-primary mx-2">Cek Pesanan</a>
+            <a href="{{ url_for('index') }}" class="btn btn-success mx-2">Halaman Utama</a>
+        </div>
+        
+        <!-- ... (your content) -->
+    </div>
+{% endblock %}

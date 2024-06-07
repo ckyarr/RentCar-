@@ -1,0 +1,34 @@
+{% extends 'layout.html' %} {% block body %}
+<h1>Edit Mobil</h1>
+{% from "includes/_formhelpers.html" import render_field %}
+<form action="" method="post">
+  <div class="form-group">
+    {{render_field(form.merk, class_="form-control")}}
+  </div>
+  <div class="form-group">
+    {{render_field(form.jenis, class_="form-control")}}
+  </div>
+  <div class="form-group">
+    {{render_field(form.model, class_="form-control")}}
+  </div>
+  <div class="form-group">
+    {{render_field(form.jumlah_penumpang, class_="form-control")}}
+  </div>
+  <div class="form-group">
+    {{render_field(form.tahun, class_="form-control")}}
+  </div>
+  <div class="form-group">
+    {{render_field(form.nomor_telepon, class_="form-control")}}
+  </div>
+  <div class="form-group">
+    {{render_field(form.harga_sewa, class_="form-control")}}
+  </div>
+  <div class="form-group">
+    {{render_field(form.lokasi, class_="form-control")}}
+  </div>
+  <p>
+    <input type="submit" name="submit" class="btn btn-primary" value="Edit" />
+    <input type="submit" name="submit" class="btn btn-basic" value="Cancel" />
+  </p>
+</form>
+{% endblock %}

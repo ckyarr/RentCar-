@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+{% block body %}
+<h1>Add Car</h1>
+{% from "includes/_formhelpers.html" import render_field %}
+<form action="/add_car" method="post" enctype="multipart/form-data">
+  <div class="form-group">
+    {{ render_field(form.nomor_plat, class_="form-control") }}
+  </div>
+  <div class="form-group">
+    {{ render_field(form.merk, class_="form-control select2") }}
+  </div>
+  <div class="form-group">
+    {{ render_field(form.jenis, class_="form-control select2") }}
+  </div>
+  <div class="form-group">
+    {{ render_field(form.model, class_="form-control") }}
+  </div>
+  <div class="form-group">
+    {{ render_field(form.jumlah_penumpang, class_="form-control select2") }}
+  </div>
+  <div class="form-group">
+    {{ render_field(form.tahun, class_="form-control") }}
+  </div>
+  <div class="form-group">
+    {{ render_field(form.nomor_telepon, class_="form-control") }}
+  </div>
+  <div class="form-group">
+    {{ render_field(form.harga_sewa, class_="form-control") }}
+  </div>
+  <div class="form-group">
+    {{ render_field(form.lokasi, class_="form-control") }}
+  </div>
+  <div class="form-group">
+    {{ render_field(form.foto_mobil, class_="form-control") }}
+  </div>
+  <p>
+    <input type="submit" name="submit" class="btn btn-primary" value="Add" />
+    <input type="submit" name="submit" class="btn btn-basic" value="Cancel" />
+  </p>
+</form>
+
+<!-- Sertakan library Select2 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+<!-- Inisialisasi Select2 untuk field dengan kelas select2 -->
+<script>
+  $(document).ready(function() {
+    $('.select2').select2({
+      tags: true,  // Memungkinkan pengguna memasukkan nilai baru
+      tokenSeparators: [',', ' '],  // Pisahkan nilai dengan koma atau spasi
+      createTag: function (params) {
+        var term = $.trim(params.term);
+
+        if (term === '') {
+          return null;
+        }
+
+        return {
+          id: term,
+          text: term,
+          newTag: true
+        }
+      }
+    });
+  });
+</script>
+{% endblock %}

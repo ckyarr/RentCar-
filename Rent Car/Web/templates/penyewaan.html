@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <h1>Penyewaan <small>{{session.username}}</small></h1>
+  <a class="btn btn-success" href='/all_car'>Mulai Sewa</a>
+  <hr>
+  <table class="table table-striped">
+    <tr>
+      <th>ID Sewa</th>
+      <th>Nomor Plat</th>
+      <th>Tanggal Sewa</th>
+      <th>Tanggal Kembali</th>
+      <th>Total Biaya</th>
+    </tr>
+    {% for r in res %}
+      <tr>
+        <td>{{r.id_sewaa}}</td>
+        <td>{{r.nomor_plat}}</td>
+        <td>{{r.fromdate}}</td>
+        <td>{{r.todate}}</td>
+        <td>{{r.total_biaya}}</td>
+        <td>
+          <form action="{{ url_for('delete_penyewaan', id=[r.id_sewa, r.rm]) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="action" value="{{ r.rm }}">
+            <input type="submit" value="{{ r.rm }}" class="{{ r.value }}">
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'layout.html' %} {% block body %}
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Car Management</h1>
+  <a class="btn btn-success mb-3" href="/add_car">Add Your Car</a>
+  <hr />
+
+  <div class="row">
+    {% for t in truc %}
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <img
+          src="{{ url_for('get_foto', filename=t.foto_mobil) }}"
+          class="card-img-top"
+          alt="Car Photo"
+          style="width: 100%; height: 300px; object-fit: cover"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ t.merk }}</h5>
+          <p class="card-text">
+            <strong>Nomor Plat:</strong> {{ t.nomor_plat }}<br />
+            <strong>Jenis:</strong> {{ t.jenis }}<br />
+            <strong>Model:</strong> {{ t.model }}<br />
+            <strong>Jumlah Penumpang:</strong> {{ t.jumlah_penumpang }}<br />
+            <strong>Tahun Produksi:</strong> {{ t.tahun }}<br />
+            <strong>Nomor Telepon:</strong> {{ t.nomor_telepon }}<br />
+            <strong>Harga Sewa:</strong> {{ t.harga_sewa | format_rupiah }}<br />
+            <strong>Lokasi:</strong> {{ t.lokasi }}<br />
+            <strong>Status:</strong>
+            {% if t.isAvailable == 1 %} Ada {% else %} Disewa {% endif %}
+            <br />
+          </p>
+          <div class="d-flex justify-content-between align-items-center">
+            <form action="{{url_for('delete_car', id=t.nomor_plat)}}" method="post">
+              <input type="hidden" name="nomor_plat" value="{{ t.nomor_plat }}">
+              <input type="submit" value="DELETE" class="btn btn-danger">
+          </form>          
+
+            <a href="edit_car/{{t.nomor_plat}}" class="btn btn-warning">Edit</a>
+            {% if t.isAvailable == 0 %}
+            <form action="{{url_for('car')}}" method="post">
+              <input
+                type="hidden"
+                name="nomor_plat"
+                value="{{ t.nomor_plat }}"
+              />
+              <input
+                type="submit"
+                name="action"
+                value="Selesai"
+                class="btn btn-success"
+              />
+            </form>
+            {% else %}
+            <!-- Tampilkan tombol Selesai dalam mode nonaktif (disabled) -->
+            <button class="btn btn-success" disabled>Selesai</button>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if not truc %}
+  <p class="text-center mt-3">No cars available.</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'layout.html' %} {% block body %}
+<!-- konfirmasi.html -->
+
+<h1>Konfirmasi Pemesanan</h1>
+<p>ID Sewa: {{ id_sewa }}</p>
+<p>ID Penyewa: {{ id_penyewa }}</p>
+<p>Nomor Plat Mobil: {{ nomor_plat }}</p>
+<p>Tanggal Mulai Sewa: {{ fromdate }}</p>
+<p>Tanggal Kembali: {{ todate }}</p>
+<p>Total Hari: {{ lama_sewa }}</p>
+<p>Total Biaya: {{ total_biaya | format_rupiah }}</p>
+
+<h2>Informasi Mobil</h2>
+<p>Nomor Plat: {{ mobil_info.nomor_plat }}</p>
+<p>Merk: {{ mobil_info.merk }}</p>
+<p>Jenis: {{ mobil_info.jenis }}</p>
+<p>Model: {{ mobil_info.model }}</p>
+<p>Jumlah Penumpang: {{ mobil_info.jumlah_penumpang }}</p>
+<p>Tahun Produksi: {{ mobil_info.tahun }}</p>
+<p>Nomor Telepon: {{ mobil_info.nomor_telepon }}</p>
+<p>Harga Sewa: {{ mobil_info.harga_sewa | format_rupiah }}</p>
+<p>Lokasi: {{ mobil_info.lokasi }}</p>
+<!-- ... tambahkan informasi mobil lainnya yang ingin Anda tampilkan -->
+
+
+
+<!-- Tambahkan elemen lain sesuai kebutuhan -->
+<div class="d-flex justify-content-between align-items-center">
+    <form action="{{ url_for('konfirmasi_sewa') }}" method="post">
+        <input type="hidden" name="nomor_plat" value="{{ nomor_plat }}">
+        <input type="submit" class="btn btn-success" value="Konfirmasi Pemesanan">
+    </form>
+    <form action="{{ url_for('cancel_booking', id_sewa=id_sewa) }}" method="get">
+        <input type="submit" class="btn btn-danger" value="Batalkan Pemesanan">
+    </form>    
+    
+</div>
+
+
+
+{% endblock %}
